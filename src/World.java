@@ -1,5 +1,11 @@
+import java.util.HashMap;
 
 public class World {
+	
+	public static HashMap<String, Room> rooms = 
+			new HashMap<String, Room>();
+	
+	
 	public static Room buildWorld() {
 		// Create Rooms
 		Room livingRoom = new Room("livingRoom", "You are in the living room.");

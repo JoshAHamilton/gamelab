@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +16,22 @@ public class Game {
 	
 	public static void print(String message) {
 		System.out.println(message+"\n");
+	}
+	
+	public static void saveGame() {
+		File saveFile = new File("save");
+		try {
+			saveFile.createNewFile();
+			ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(saveFile));
+			stream.writeObject(currentRoom);
+			stream.writeObject(inventory);
+			stream.writeObject(World.rooms);
+			stream.close();
+			Game.print("Game Saved.");
+		} catch (IOException e) {
+			print("ERROR: Cannot save file.");
+			e.printStackTrace();
+		}
 	}
 	
 	public static void move(String direction) {
@@ -124,11 +144,22 @@ public class Game {
 							break;
 						} else {
 							System.out.println("There is no "+itemToUseName+" in inventory.");
+							break;
 						}
+					}
+					// Search the room for the item
+					if(currentRoom.hasItem(itemToUseName)) {
+						if(itemToUseName.equals("goo")) {
+							
+						}
+					} else {
+						
 					}
 				} else {
 					System.out.println("No item given to use.");
 				}
+			} else if(playerCommand.equals("save")) {
+				saveGame();
 			} else {
 				System.out.println("Invalid command.");
 			}

@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Room {
+public class Room implements Serializable{
+	
 	private Room east;
 	private Room west;
 	private Room north;
@@ -19,6 +21,7 @@ public class Room {
 		desc = d;
 		locked = false;
 		roomItems = new HashMap<String, Item>();
+		World.rooms.put(name, this); // Room object places itself in the map
 	}
 	
 	public String getName() {
