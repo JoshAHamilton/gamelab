@@ -80,11 +80,13 @@ public class World {
 		// chain in hallway
 		Item chain = new Chain();
 		chain.setDesc("This is a suspicious chain hanging from the ceiling.");
+		chain.setHeavy(true);
 		hallway.addItem(chain);
 		
 		// shower in bathroom
 		Item shower = new Shower();
 		shower.setDesc("This seems to be a clean and functional shower.");
+		shower.setHeavy(true);
 		bathRoom.addItem(shower);
 		
 		return livingRoom;

@@ -61,6 +61,15 @@ public class Game {
 	    return false;
 	}
 	
+	public static boolean checkInventory(String itemName) {
+		for(Item item : inventory) {
+			if (item.getName().equals(itemName)) {
+	            return true;
+	        }
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		String playerCommand;
@@ -137,23 +146,24 @@ public class Game {
 			} else if(itemName[0].equals("use")) {
 				if (itemName.length >= 2) {
 					String itemToUseName = itemName[1];
+					boolean itemFoundInInventory = false;
 					// Search the inventory for the item
 					for (Item item : inventory) {
 						if (item.getName().equals(itemToUseName)) {
 							item.use();
-							break;
-						} else {
-							System.out.println("There is no "+itemToUseName+" in inventory.");
+							itemFoundInInventory = true;
 							break;
 						}
 					}
 					// Search the room for the item
-					if(currentRoom.hasItem(itemToUseName)) {
-						if(itemToUseName.equals("goo")) {
-							
+					if(!itemFoundInInventory) {
+						if(currentRoom.hasItem(itemToUseName)) {
+							if(itemToUseName.equals("chain") || itemToUseName.equals("shower")) {
+								currentRoom.getItem(itemToUseName).use();
+							}
+						} else {
+							System.out.println("There is no "+itemToUseName+" to use.");
 						}
-					} else {
-						
 					}
 				} else {
 					System.out.println("No item given to use.");
