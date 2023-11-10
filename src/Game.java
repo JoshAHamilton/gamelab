@@ -3,12 +3,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Game {
 	
 	private static Room currentRoom;
-	private static ArrayList<Item> inventory = new ArrayList<Item>();
+	public static ArrayList<Item> inventory = new ArrayList<Item>();
+	
+	public static HashMap<String, String> roomDescs = new HashMap<String, String>();
+	
+	//FINISH MAKING THE HASHMAP WITH ROOM DESCRIPTIONS
+	public static void populateMap() {
+		
+	}
+	
+	public static void setCurrentRoom(Room r) {
+		currentRoom = r;
+	}
 	
 	public static Room getCurrentRoom() {
 		return currentRoom;
@@ -106,12 +118,7 @@ public class Game {
 				if(itemName.length >= 2) {
 					if(currentRoom.hasItem(itemName[1])) {
 						Item item = currentRoom.getItem(itemName[1]);
-						if(item.isHeavy()) {
-							System.out.println("That's too heavy to carry around!");
-						} else {
-							inventory.add(currentRoom.removeItem(itemName[1]));
-							System.out.println("You pick up the " + itemName[1] + ".");
-						}
+						item.take();
 						//inventory.add(currentRoom.removeItem(itemName[1]));
 						//System.out.println("You take "+itemName[1]);
 					} else {

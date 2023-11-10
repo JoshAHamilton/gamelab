@@ -8,16 +8,16 @@ public class Key extends Item {
 	public void use() {
 		if(Game.getCurrentRoom().getName().equals("bedRoom")) {
 			if(isUsed()) {
-				System.out.println("The chest is already open.");
+				Game.print("The chest is already open.");
 			} else {
-				System.out.println("The key fits into the chest! You open the chest and " + "find a diamond inside!");
+				Game.print("The key fits into the chest! You open the chest and " + "find a diamond inside!");
 				Item diamond = new Item("diamond");
 				diamond.setDesc("diamond");
 				Game.getCurrentRoom().addItem(diamond);
 				setUsed(true);
 			} 
 		} else {
-			System.out.println("The key doesn't fit in this room.");
+			Game.print("The key doesn't fit in this room.");
 		}
 	}
 }

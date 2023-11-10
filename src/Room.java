@@ -12,12 +12,14 @@ public class Room implements Serializable{
 	private String desc; // desc = description
 	private boolean locked; // Is the room locked?
 	private String name;
+	private String roomID;
 	
 	private HashMap<String, Item> roomItems;
 	
 	// Constructor Method
 	public Room(String n, String d) {
 		name = n;
+		roomID = n;
 		desc = d;
 		locked = false;
 		roomItems = new HashMap<String, Item>();
@@ -54,6 +56,14 @@ public class Room implements Serializable{
 	
 	public boolean hasItem(String name) {
 		return roomItems.containsKey(name);
+	}
+	
+	public void setRoomID(String id) {
+		roomID = id;
+	}
+	
+	public String getDesc() {
+		return Game.roomDescs.get(roomID);
 	}
 	
 	public Room getExit(char d) {

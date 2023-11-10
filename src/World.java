@@ -2,9 +2,7 @@ import java.util.HashMap;
 
 public class World {
 	
-	public static HashMap<String, Room> rooms = 
-			new HashMap<String, Room>();
-	
+	public static HashMap<String, Room> rooms = new HashMap<String, Room>();
 	
 	public static Room buildWorld() {
 		// Create Rooms
@@ -15,6 +13,15 @@ public class World {
 		Room hallway = new Room("hallway", "You are now in the hallway. There is a door to the west and a chain hanging from the ceiling.");
 		Room bedRoom = new Room("bedRoom", "You are now in the bedroom.");
 		Room bathRoom = new Room("bathRoom", "You are now in the bathroom.");
+		/*
+		Room livingRoom = Room("LIVINGROOM");
+		Room kitchen = new Room("KITCHEN");
+		Room diningRoom = new Room("DININGROOM");
+		Room closet = new Room("CLOSET");
+		Room hallway = new Room("HALLWAY");
+		Room bedRoom = new Room("BEDROOM");
+		Room bathRoom = new Room("BATHROOM");
+		*/
 		
 		// Connect Rooms (addExits)
 		// Living to kitchen
