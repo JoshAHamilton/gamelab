@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,9 +14,17 @@ public class Game {
 	
 	public static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	
-	//FINISH MAKING THE HASHMAP WITH ROOM DESCRIPTIONS
-	public static void populateMap() {
-		
+	public static void populateMap(File rooms) {
+		try {
+			Scanner scan = new Scanner(new File("rooms"));
+			while(scan.hasNextLine()) {
+				String line = scan.nextLine();
+				String[] words = line.split("#");
+				roomDescs.put(words[0], words[1]);
+			}
+		} catch(FileNotFoundException ex) {
+			print("File "+rooms+" not found");
+		}
 	}
 	
 	public static void setCurrentRoom(Room r) {
@@ -59,6 +68,7 @@ public class Game {
 			System.out.println("You can't go that way!");
 		}
 	}
+	
 	public static void addToInventory(Item item) {
 		inventory.add(item);
 	}
