@@ -14,7 +14,7 @@ public class Game {
 	
 	public static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	
-	public Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 	
 	public static void populateMap(File rooms) {
 		try {
