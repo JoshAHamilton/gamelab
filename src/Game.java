@@ -14,6 +14,8 @@ public class Game {
 	
 	public static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	
+	public Scanner scan = new Scanner(System.in);
+	
 	public static void populateMap(File rooms) {
 		try {
 			Scanner scan = new Scanner(new File("rooms"));
@@ -93,9 +95,9 @@ public class Game {
 	}
 	
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
 		String playerCommand;
 		String[] itemName;
+		NPC npc;
 		currentRoom = World.buildWorld();
 		System.out.println(currentRoom);
 		do {
@@ -185,6 +187,9 @@ public class Game {
 				} else {
 					System.out.println("No item given to use.");
 				}
+			} else if(playerCommand.equals("talk")) {
+				npc = currentRoom.getNPC(itemName[1]);
+				npc.talk();
 			} else if(playerCommand.equals("save")) {
 				saveGame();
 			} else {

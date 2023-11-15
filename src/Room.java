@@ -9,21 +9,31 @@ public class Room implements Serializable{
 	private Room south;
 	private Room up;
 	private Room down;
-	private String desc; // desc = description
+	// private String desc; // desc = description
 	private boolean locked; // Is the room locked?
 	private String name;
 	private String roomID;
 	
 	private HashMap<String, Item> roomItems;
+	private HashMap<String, NPC> roomNPCs;
 	
 	// Constructor Method
 	public Room(String n, String d) {
 		name = n;
 		roomID = n;
-		desc = d;
+		// desc = d;
 		locked = false;
 		roomItems = new HashMap<String, Item>();
+		roomNPCs = new HashMap<String, NPC>();
 		World.rooms.put(name, this); // Room object places itself in the map
+	}
+	
+	public void addNPC(NPC npc) {
+		roomNPCs.put(npc.getName(), npc);
+	}
+	
+	public NPC getNPC(String name) {
+		return roomNPCs.get(name);
 	}
 	
 	public String getName() {
@@ -62,8 +72,9 @@ public class Room implements Serializable{
 		roomID = id;
 	}
 	
-	public String getDesc() {
-		return Game.roomDescs.get(roomID);
+	public String getDesc(String key) {
+		return Game.roomDescs.get(key);
+		// return Game.roomDescs.get(roomID);
 	}
 	
 	public Room getExit(char d) {
@@ -100,8 +111,9 @@ public class Room implements Serializable{
 		}
 	}
 	
-	public String toString() {
-		return desc;
+	public String toString(String key) {
+		return Game.roomDescs.get(key);
+		// return desc;
 	}
 	
 }

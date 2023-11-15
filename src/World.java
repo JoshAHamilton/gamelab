@@ -96,6 +96,9 @@ public class World {
 		shower.setHeavy(true);
 		bathRoom.addItem(shower);
 		
+		
+		// Add NPCs to rooms
+		
 		return livingRoom;
 	}
 }
