@@ -4,7 +4,7 @@ public class Puppy extends NPC{
 	private int counter = 0;
 	
 	public Puppy() {
-		super("puppy","A hideous pupper wags his tail stupidly at you.");
+		super("puppy","A hideous puppy wags his tail at you.");
 	}
 	
 	@Override
