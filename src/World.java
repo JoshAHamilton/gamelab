@@ -98,6 +98,8 @@ public class World {
 		
 		
 		// Add NPCs to rooms
+		NPC puppy = new Puppy();
+		livingRoom.addNPC(puppy);
 		
 		return livingRoom;
 	}

@@ -143,7 +143,9 @@ public class Game {
 				if (itemName.length >= 2) {
 			        String itemToLookName = itemName[1];
 			        boolean itemFoundInInventory = false;
-			        
+			        //if(itemName[1]) {
+			        	
+			       // }
 			        // Search the inventory for the item
 			        for (Item item : inventory) {
 			            if (item.getName().equals(itemToLookName)) {
@@ -152,16 +154,21 @@ public class Game {
 			                break;
 			            }
 			        }
-
+			        
 			        // If not found in inventory, check the current room
 			        if (!itemFoundInInventory && currentRoom.hasItem(itemToLookName)) {
 			            currentRoom.getItem(itemToLookName).look();
 			        } else if (!itemFoundInInventory) {
 			            System.out.println("There is no " + itemToLookName + " in inventory or the room.");
 			        }
-			    } else {
-			        System.out.println("No item given to look at");
-			    }
+			        
+			        // Look for NPC in room
+			        if(currentRoom.hasNPC(itemToLookName)) {
+			        	currentRoom.getNPC(itemToLookName).look();
+			        }
+				} else {
+					System.out.println("No item given to look at");
+				}
 			} else if(itemName[0].equals("use")) {
 				if (itemName.length >= 2) {
 					String itemToUseName = itemName[1];
@@ -187,9 +194,17 @@ public class Game {
 				} else {
 					System.out.println("No item given to use.");
 				}
-			} else if(playerCommand.equals("talk")) {
-				npc = currentRoom.getNPC(itemName[1]);
-				npc.talk();
+			} else if(itemName[0].equals("talk")) {
+				if (itemName.length >= 2) {
+					if(currentRoom.hasNPC(itemName[1])) {
+						npc = currentRoom.getNPC(itemName[1]);
+						npc.talk();
+					} else {
+						print("There is no "+itemName[1]+" to talk to here.");
+					}
+				} else {
+					print("Nothing given to talk to.");
+				}
 			} else if(playerCommand.equals("save")) {
 				saveGame();
 			} else {

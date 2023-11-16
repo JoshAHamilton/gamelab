@@ -28,8 +28,18 @@ public class Room implements Serializable{
 		World.rooms.put(name, this); // Room object places itself in the map
 	}
 	
+	public boolean hasNPC(String name) {
+		return roomNPCs.containsKey(name);
+	}
+	
 	public void addNPC(NPC npc) {
 		roomNPCs.put(npc.getName(), npc);
+	}
+	
+	public NPC removeNPC(String name) {
+		NPC it = roomNPCs.get(name);
+		roomNPCs.remove(name);
+		return it;
 	}
 	
 	public NPC getNPC(String name) {
