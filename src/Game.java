@@ -131,8 +131,6 @@ public class Game {
 					if(currentRoom.hasItem(itemName[1])) {
 						Item item = currentRoom.getItem(itemName[1]);
 						item.take();
-						//inventory.add(currentRoom.removeItem(itemName[1]));
-						//System.out.println("You take "+itemName[1]);
 					} else {
 						System.out.println("There is no "+itemName[1]+"!");
 					}
@@ -143,31 +141,33 @@ public class Game {
 				if (itemName.length >= 2) {
 			        String itemToLookName = itemName[1];
 			        boolean itemFoundInInventory = false;
-			        //if(itemName[1]) {
+			        // Check if NPC or Item
+			        
+			        if(currentRoom.isNPC(itemToLookName)) {
 			        	
-			       // }
-			        // Search the inventory for the item
-			        for (Item item : inventory) {
-			            if (item.getName().equals(itemToLookName)) {
-			                item.look();
-			                itemFoundInInventory = true;
-			                break;
-			            }
 			        }
 			        
-			        // If not found in inventory, check the current room
-			        if (!itemFoundInInventory && currentRoom.hasItem(itemToLookName)) {
-			            currentRoom.getItem(itemToLookName).look();
-			        } else if (!itemFoundInInventory) {
-			            System.out.println("There is no " + itemToLookName + " in inventory or the room.");
-			        }
-			        
-			        // Look for NPC in room
-			        if(currentRoom.hasNPC(itemToLookName)) {
-			        	currentRoom.getNPC(itemToLookName).look();
+			        if (currentRoom.hasNPC(itemToLookName)) {
+				        currentRoom.getNPC(itemToLookName).look();
+			        } else {
+			        	// Search the inventory for the item
+				        for (Item item : inventory) {
+				            if (item.getName().equals(itemToLookName)) {
+				                item.look();
+				                itemFoundInInventory = true;
+				                break;
+				            }
+				        }
+				        
+				        // If not found in inventory, check the current room
+				        if (!itemFoundInInventory && currentRoom.hasItem(itemToLookName)) {
+				            currentRoom.getItem(itemToLookName).look();
+				        } else if (!itemFoundInInventory) {
+				            System.out.println("There is no " + itemToLookName);
+				        }
 			        }
 				} else {
-					System.out.println("No item given to look at");
+					System.out.println("Nothing given to look at");
 				}
 			} else if(itemName[0].equals("use")) {
 				if (itemName.length >= 2) {

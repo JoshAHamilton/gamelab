@@ -52,8 +52,9 @@ public class Puppy extends NPC{
 				break;
 			case 2:
 				say("You're a bad person! I don't like you!");
-				// Finish removing the puppy from the room
-				// Room.getCurrentRoom().removeNPC("puppy");
+				Game.print("The dog runs off elsewhere.");
+				Room currentRoom = Game.getCurrentRoom();
+				currentRoom.removeNPC("puppy");
 				break;
 			}
 		}

@@ -101,6 +101,9 @@ public class World {
 		NPC puppy = new Puppy();
 		livingRoom.addNPC(puppy);
 		
+		NPC butler = new Butler();
+		kitchen.addNPC(butler);
+		
 		return livingRoom;
 	}
 }

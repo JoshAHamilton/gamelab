@@ -32,6 +32,14 @@ public class Room implements Serializable{
 		return roomNPCs.containsKey(name);
 	}
 	
+	public boolean isNPC(String name) {
+		if(roomNPCs.containsKey(name)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void addNPC(NPC npc) {
 		roomNPCs.put(npc.getName(), npc);
 	}
