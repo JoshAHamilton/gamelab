@@ -142,10 +142,9 @@ public class Game {
 			        String itemToLookName = itemName[1];
 			        boolean itemFoundInInventory = false;
 			        // Check if NPC or Item
-			        
-			        if(currentRoom.isNPC(itemToLookName)) {
+			        //if(currentRoom.isNPC(itemToLookName)) {
 			        	
-			        }
+			        //}
 			        
 			        if (currentRoom.hasNPC(itemToLookName)) {
 				        currentRoom.getNPC(itemToLookName).look();
