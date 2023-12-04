@@ -10,12 +10,16 @@ import java.util.Scanner;
 public class Game {
 	
 	private static Room currentRoom;
+	private static GameGUI gui;
+	
 	public static ArrayList<Item> inventory = new ArrayList<Item>();
 	
 	public static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	
 	public static Scanner scan = new Scanner(System.in);
 	
+	// Also involved in room description printing!
+	/*
 	public static void populateMap(File rooms) {
 		try {
 			Scanner scan = new Scanner(new File("rooms"));
@@ -28,6 +32,22 @@ public class Game {
 			print("File "+rooms+" not found");
 		}
 	}
+	*/
+	//Teachers solution?
+	public static void populateMap() {
+		try {
+			Scanner scan = new Scanner(new File("rooms.txt"));
+			while(scan.hasNextLine()) {
+				String room = scan.nextLine();
+				String desc = scan.nextLine();
+				scan.nextLine(); // Read # symbol
+				roomDescs.put(room,  desc);
+			}
+		} catch (FileNotFoundException ex) {
+			print("File not found");
+		}
+	}
+	
 	
 	public static void setCurrentRoom(Room r) {
 		currentRoom = r;
@@ -38,7 +58,8 @@ public class Game {
 	}
 	
 	public static void print(String message) {
-		System.out.println(message+"\n");
+		//System.out.println(message+"\n");
+		gui.print(message.toString());
 	}
 	
 	public static void saveGame() {
@@ -99,17 +120,24 @@ public class Game {
 		String[] itemName;
 		NPC npc;
 		currentRoom = World.buildWorld();
-		System.out.println(currentRoom);
+		gui = new GameGUI();
+		//System.out.println(currentRoom);
+		// Fix Here! This prints the room descriptions!
+		try {
+			print(roomDescs.get(currentRoom.toString()).toString());
+		} catch(NullPointerException ec) {
+			print("Hey, it didn't work.");
+		}
 		do {
-			System.out.print("What do you want to do? ");
+			print("What do you want to do? ");
 			playerCommand = scan.nextLine();
 			itemName = playerCommand.split(" ");
 			if(playerCommand.equals("i")) {
 				if(inventory.isEmpty()) {
-					System.out.println("You are carrying nothing.");
+					print("You are carrying nothing.");
 				} else {
 					for(Item i : inventory) {
-						System.out.println(i);
+						print(i.toString());
 					}
 				}
 			} else if (playerCommand.equals("e")) {
@@ -132,10 +160,10 @@ public class Game {
 						Item item = currentRoom.getItem(itemName[1]);
 						item.take();
 					} else {
-						System.out.println("There is no "+itemName[1]+"!");
+						print("There is no "+itemName[1]+"!");
 					}
 				} else {
-					System.out.println("No item given to take");
+					print("No item given to take");
 				}
 			} else if(itemName[0].equals("look")) {
 				if (itemName.length >= 2) {
