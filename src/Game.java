@@ -122,7 +122,7 @@ public class Game {
 		NPC npc;
 		currentRoom = World.buildWorld();
 		gui = new GameGUI();
-		//System.out.println(currentRoom);
+		// System.out.println(currentRoom);
 		// Fix Here! This prints the room descriptions!
 		try {
 			print(roomDescs.get(currentRoom.toString()).toString());
