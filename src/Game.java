@@ -82,13 +82,14 @@ public class Game {
 		Room nextRoom = currentRoom.getExit(direction.charAt(0));
 		if(nextRoom != null) {
 			if(nextRoom.isLocked()) {
-				System.out.println("The room is locked");
+				print("The room is locked");
 			} else {
 				currentRoom = nextRoom;
-				System.out.println(currentRoom);
+				print(currentRoom.toString());
+				//print(roomDescs.get(currentRoom.toString()));
 			}
 		} else {
-			System.out.println("You can't go that way!");
+			print("You can't go that way!");
 		}
 	}
 	
@@ -153,7 +154,7 @@ public class Game {
 			} else if (playerCommand.equals("d")) {
 				move(playerCommand);
 			} else if (playerCommand.equals("x")) {
-				System.out.println("Okay. Bye!");
+				print("Okay. Bye!");
 			} else if(itemName[0].equals("take")) {
 				if(itemName.length >= 2) {
 					if(currentRoom.hasItem(itemName[1])) {
@@ -169,11 +170,6 @@ public class Game {
 				if (itemName.length >= 2) {
 			        String itemToLookName = itemName[1];
 			        boolean itemFoundInInventory = false;
-			        // Check if NPC or Item
-			        //if(currentRoom.isNPC(itemToLookName)) {
-			        	
-			        //}
-			        
 			        if (currentRoom.hasNPC(itemToLookName)) {
 				        currentRoom.getNPC(itemToLookName).look();
 			        } else {
@@ -190,11 +186,11 @@ public class Game {
 				        if (!itemFoundInInventory && currentRoom.hasItem(itemToLookName)) {
 				            currentRoom.getItem(itemToLookName).look();
 				        } else if (!itemFoundInInventory) {
-				            System.out.println("There is no " + itemToLookName);
+				            print("There is no " + itemToLookName);
 				        }
 			        }
 				} else {
-					System.out.println("Nothing given to look at");
+					print("Nothing given to look at");
 				}
 			} else if(itemName[0].equals("use")) {
 				if (itemName.length >= 2) {
@@ -219,7 +215,7 @@ public class Game {
 						}
 					}
 				} else {
-					System.out.println("No item given to use.");
+					print("No item given to use.");
 				}
 			} else if(itemName[0].equals("talk")) {
 				if (itemName.length >= 2) {
@@ -235,7 +231,7 @@ public class Game {
 			} else if(playerCommand.equals("save")) {
 				saveGame();
 			} else {
-				System.out.println("Invalid command.");
+				print("Invalid command.");
 			}
 		} while(!playerCommand.equals("x"));
 		scan.close();
